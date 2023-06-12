@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import login1 from '../assets/image/login.avif'
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 
 
@@ -9,7 +10,17 @@ const Login = () => {
 
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+
+  const { user, login } = useContext(AuthContext)
+
+  const onSubmit = data => {
+    console.log(data)
+    login(data.email, data.password)
+      .then(result => {
+        const user = result.user;
+        console.log(user)
+      })
+  };
 
 
 
