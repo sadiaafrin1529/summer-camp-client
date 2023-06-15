@@ -17,6 +17,10 @@ const Register = () => {
     .then(result =>{
       const loggedUser = result.user;
       console.log(loggedUser);
+      updateUserProfile(data.displayName,data.photoURL)
+      .then(()=>{
+        
+      })
     })
     
 

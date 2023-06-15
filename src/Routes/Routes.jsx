@@ -7,6 +7,7 @@ import Home from "../components/Home";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Dashboard from "../components/LayOut/Dashboard";
+import AddCourse from "../pages/AddCourse";
 
 
  export const router = createBrowserRouter([
@@ -33,7 +34,8 @@ import Dashboard from "../components/LayOut/Dashboard";
       element:<Dashboard></Dashboard>,
       children:[
         {
-          
+          path:'addcourse',
+          element:<AddCourse></AddCourse>
         }
       ]
     }
