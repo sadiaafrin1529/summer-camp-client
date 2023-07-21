@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
 import login1 from '../assets/image/login.avif'
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
+import GoogleLogIn from './GoogleLogIn';
 
 
 
 const Login = () => {
+
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/";
 
 
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -20,6 +24,7 @@ const Login = () => {
         const user = result.user;
         console.log(user)
       })
+      navigate(from, { replace: true });
   };
 
 
@@ -52,7 +57,9 @@ const Login = () => {
             </div>
           </form>
           <p className='m-4 text-center'>Don't Have An Acoount?<Link to='/register'>Register</Link></p>
+          <GoogleLogIn></GoogleLogIn>
         </div>
+       
       </div>
     </div>
   );

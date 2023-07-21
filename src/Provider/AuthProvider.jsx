@@ -1,69 +1,106 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { app } from '../FireBase/Firebase.config';
+import { createContext, useEffect } from "react";
+import {
+ 
+    GithubAuthProvider,
+  GoogleAuthProvider,
+  
+  createUserWithEmailAndPassword,
+  
+  getAuth,
+  onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  
+} from "firebase/auth";
+import { useState } from "react";
+import { app } from "../FireBase/Firebase.config";
 
 
-export const AuthContext = createContext();
+const auth = getAuth(app);
 
-const auth = getAuth(app)
+export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+  // user states
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  // login with google
 
-    const [loading, setLoading] = useState(true);
+  const provider = new GoogleAuthProvider();
+  const  googleSignIn= () => {
+    setLoading(true);
+    return loginWithPopup(auth, provider);
+  };
 
+  // login with github
 
-    //signUp
+  const gprovider = new GithubAuthProvider();
+  const handleGitHublogin = () => {
+    setLoading(true);
+    return loginWithPopup(auth, gprovider);
+  };
 
-    const creatUser = (email, password, username, useUrl) => {
-        return createUserWithEmailAndPassword(auth, email, password)
+  // create user with email password
 
-    }
-    //photourl
+  const creatUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    const updateUserProfile = (username, useUrl) => {
-        return updateProfile(auth.currentUser, {
-            displayName: username,
-            photoURL: useUrl
-        })
-    }
+  // sign in with email password
 
-    //login 
-    const login = ( email,password) =>{
-        setLoading(true)
-        return signInWithEmailAndPassword(auth,email,password)
-    }
+  const login = (email, password) => {
+    setLoading(true);
+    return  signInWithEmailAndPassword(auth, email, password);
+  };
 
-    //onauth change
-    useEffect(() => {
-        setLoading(true)
-        const unSubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user)
-            setLoading(false)
-        })
-        return () => {
-            return unSubscribe()
-        }
-    }, [])
+  // sen email verification
 
+  const emailSendToV = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
 
-    const authInfo = {
-        user,
-        loading,
+  // password handle email
 
-        creatUser,
-        updateUserProfile,
-        login
-    }
+  const passwordChangeEmail = () => {
+    return sendPasswordResetEmail(auth, user.email);
+  };
 
+  // onAuth
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
+      setUser(loggedUser);
+      setLoading(false);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
 
+  // sign out
 
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const logout = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
+  const authInfo = {
+    user,
+    setUser,
+     googleSignIn,
+    handleGitHublogin,
+    logout,
+    loading,
+    creatUser,
+    login,
+    emailSendToV,
+    passwordChangeEmail,
+  };
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

@@ -4,25 +4,48 @@ import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
+import GoogleLogIn from './GoogleLogIn';
 
 const Register = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const { creatUser,updateUserProfile} = useContext(AuthContext)
+  const { register, handleSubmit, reset } = useForm();
+  const { creatUser, updateUserProfile } = useContext(AuthContext)
 
 
 
   const onSubmit = data => {
     console.log(data)
-    creatUser(data.email,data.password)
-    .then(result =>{
-      const loggedUser = result.user;
-      console.log(loggedUser);
-      updateUserProfile(data.displayName,data.photoURL)
-      .then(()=>{
-        
+    creatUser(data.email, data.password)
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            const saveUser={name:data.name , email: data.email, photo:data.photo}
+            fetch('http://localhost:5000/users',{
+              method: 'POST',
+              headers:{
+                'content-type':'application/json'
+              },
+              body:JSON.stringify(saveUser)
+            })
+              .then(res => res.json())
+              .then(data => {
+                if (data.insertedId) {
+                  // reset()
+                  Swal.fire({
+
+                    text: 'User Added',
+                    icon: 'success',
+
+                  });
+                }
+              })
+
+          })
+          .catch(error => console.log(error))
       })
-    })
-    
+
 
 
   };
@@ -65,6 +88,7 @@ const Register = () => {
             </div>
           </form>
           <p className='m-4 text-center'>Don't Have An Acoount?<Link to='/login'>Login</Link></p>
+          <GoogleLogIn></GoogleLogIn>
         </div>
       </div>
     </div>

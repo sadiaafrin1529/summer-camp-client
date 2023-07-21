@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/image/logo.png'
+import { AuthContext } from '../Provider/AuthProvider';
 const Navbar = () => {
+  const{user,logout}=useContext(AuthContext)
     const navbarSelector = <>
      <li><Link to='/'>Home</Link></li>
-     <li><Link>Instructors</Link></li>
-     <li><Link>Classes</Link></li>
+     <li><Link to='/instractor'>Instructors</Link></li>
+     <li ><Link to='/classes'>Classes</Link></li>
      <li><Link to='/dashboard'>Dashboard</Link></li>
      <li><Link to='/login'>Login</Link></li>
     </>
     return (
         <div>
-            <div className="navbar fixed bg-opacity-20 z-10 font-bold text-3xl max-w-screen-xl bg-base-100">
+            <div className="navbar z-[100] fixed top-0 bg-white-200 z-10 font-bold text-3xl max-w-screen-xl bg-base-100">
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,9 +31,7 @@ const Navbar = () => {
      {navbarSelector}
     </ul>
   </div>
-  <div className="navbar-end">
-    <a className="btn">Button</a>
-  </div>
+  
 </div>
         </div>
     );
