@@ -8,8 +8,13 @@ const Navbar = () => {
      <li><Link to='/'>Home</Link></li>
      <li><Link to='/instractor'>Instructors</Link></li>
      <li ><Link to='/classes'>Classes</Link></li>
-     <li><Link to='/dashboard'>Dashboard</Link></li>
-     <li><Link to='/login'>Login</Link></li>
+     
+     {/* <li><Link to='/login'>Login</Link></li> */}
+     {user?.email && <li><Link to='/dashboard'>Dashboard</Link></li>}
+     {user ? <li onClick={() => logout()} ><Link  >LogOut</Link></li>
+            :
+            <li className='mt-2' ><Link  to='/login'>Login</Link></li>}
+        {user?.email && <li className='mt-2' ><img src={user?.photoURL} style={{width:'50px',height:'50px',borderRadius:'50%'}} alt="" /></li>}
     </>
     return (
         <div>

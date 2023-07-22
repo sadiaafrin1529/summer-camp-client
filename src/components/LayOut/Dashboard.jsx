@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaAngleDoubleRight, FaBook, FaDharmachakra, FaHome, FaUsersCog } from "react-icons/fa";
+import { FaAngleDoubleRight, FaBook, FaCheckCircle, FaDharmachakra, FaHome, FaRegCheckSquare, FaUsersCog } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
 const Dashboard = () => {
 
@@ -30,12 +30,14 @@ const Dashboard = () => {
                                 <li><NavLink  to='/dashboard/allusers'><FaUsersCog></FaUsersCog> All Users</NavLink></li>
                                 <li><NavLink  to='/dashboard/allcourse'><FaBook></FaBook> All Course</NavLink></li>
                                 <li><NavLink  to='/dashboard/myclasses'><FaAngleDoubleRight></FaAngleDoubleRight> My Classes</NavLink></li>
+                                <li><NavLink to='/dashboard/selectcourse'><FaCheckCircle></FaCheckCircle> Select Course</NavLink></li>
                             </>
+                            // <FaRegCheckSquare></FaRegCheckSquare>
 
                             :
                             <>
                                
-                                <li><NavLink to='/dashboard/addcourse'><FaDharmachakra></FaDharmachakra>Select Course</NavLink></li>
+                                <li><NavLink to='/dashboard/selectcourse'><FaDharmachakra></FaDharmachakra>Select Course</NavLink></li>
                                 <li><a>Order Success</a></li>
                             </>
                     }

@@ -16,6 +16,7 @@ import Instractor from "../components/Instractor";
 import MyClasses from "../pages/MyClasses";
 import EditCourse from "../pages/EditCourse";
 import PrivateRouter from "./PrivateRouter";
+import SelectedCourse from "../pages/SelectedCourse";
 
 
 export const router = createBrowserRouter([
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
       {
         path:'/classes',
         element:<Courses></Courses>,
-        loader:({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
+        // loader:({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
       },
       {
         path:'/instractor',
@@ -48,7 +49,7 @@ export const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRouter><Dashboard></Dashboard></PrivateRouter>,
     children: [
       {
         path: 'addcourse',
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
                   return { data: null }; // Return a default value if the fetch fails
                 }
               }
+            },
+            {
+              path:'selectcourse',
+              element:<SelectedCourse></SelectedCourse>
             }
     ]
   }

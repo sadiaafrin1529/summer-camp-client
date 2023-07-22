@@ -11,6 +11,8 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
   
 } from "firebase/auth";
 import { useState } from "react";
@@ -79,6 +81,16 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+
+   //photourl
+
+   const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo
+    })
+}
+
   // sign out
 
   const logout = () => {
@@ -97,6 +109,7 @@ const AuthProvider = ({ children }) => {
     login,
     emailSendToV,
     passwordChangeEmail,
+    updateUserProfile
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

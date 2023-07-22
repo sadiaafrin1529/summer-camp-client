@@ -18,7 +18,7 @@ useEffect(()=>{
        <div className='mt-40'>
        <CommonTitle title='OUR COURSES'></CommonTitle>
        </div>
-        <div className='grid grid-cols-3 '>
+        <div className='grid md:grid-cols-3 cols   gap-5 m-20'>
             
             {
                 courses.map(course=> <CoursesCard

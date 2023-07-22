@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import login1 from '../assets/image/login.avif'
 import { useForm } from "react-hook-form";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import GoogleLogIn from './GoogleLogIn';
 
@@ -10,6 +10,7 @@ import GoogleLogIn from './GoogleLogIn';
 const Login = () => {
 
   const location = useLocation()
+  const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
 
@@ -23,8 +24,8 @@ const Login = () => {
       .then(result => {
         const user = result.user;
         console.log(user)
+        navigate(from, { replace: true });
       })
-      navigate(from, { replace: true });
   };
 
 
