@@ -1,0 +1,28 @@
+:root{
+    --primary :hsla(0, 2%, 59%, 0.65);
+    --secondary: hsla(216, 7%, 15%, 0.65);
+
+
+}
+
+.middleBanner{
+    background-image: linear-gradient(135deg, var(--primary), var(--secondary)),
+    url('../../src/assets/image/middlebanner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top bottom;
+}
+.background{
+    padding: 30px 30px;
+    width: 100%;
+    height: 60vh;
+    font-family: 'playball';
+    color: aliceblue;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}

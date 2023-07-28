@@ -63,7 +63,7 @@ const defaultName = user?.displayName;
             <CommonTitle title={'ADD COURSE'}></CommonTitle>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full p-4'>
 
-                <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
+                <input  type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
                 <div className=' flex '>
                     <div className="form-control  w-full m-4 ">
                         <label className="label">

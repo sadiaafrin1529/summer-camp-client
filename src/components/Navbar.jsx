@@ -1,9 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/image/logo.png'
 import { AuthContext } from '../Provider/AuthProvider';
+import axios from 'axios';
 const Navbar = () => {
   const{user,logout}=useContext(AuthContext)
+  console.log(user)
+
+  const [photo,setPhoto] = useState()
+
+  axios.get(`http://localhost:5000/users/personalData?email=xyz@gmail.com`)
+  .then(res=>{
+    console.log(res.data)
+  })
+  .catch(error=>{
+    console.log(error)
+  })
+  console.log(photo)
+
     const navbarSelector = <>
      <li><Link to='/'>Home</Link></li>
      <li><Link to='/instractor'>Instructors</Link></li>
@@ -28,8 +42,9 @@ const Navbar = () => {
        {navbarSelector}
       </ul>
     </div>
+    <p className='font-bold' style={{fontFamily:'serif'}}>Arts<span className='text-stone-500'>&</span>Craft</p>
     
-    <img className="w-24 mask mask-squircle ml-36" src={logo} alt="" />
+    {/* <img className="w-24 mask mask-squircle ml-36" src={logo} alt="" /> */}
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

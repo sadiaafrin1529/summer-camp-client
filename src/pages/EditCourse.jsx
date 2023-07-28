@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CommonTitle from '../components/CommonTitle';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Provider/AuthProvider';
-import { useLoaderData} from 'react-router-dom';
+import { useLoaderData, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
@@ -14,7 +14,8 @@ const EditCourse = () => {
     console.log(previousData)
     // const [previousData, setPreviousData] = useState({})
     const {user} = useContext(AuthContext);
-   
+   const id = useParams()
+   console.log(id)
     
     const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
     
@@ -37,6 +38,7 @@ const onSubmit = data => {
     })
       .then(res => res.json())
       .then(coursedata => {
+        console.log(coursedata._id)
         if (coursedata.success) {
           const imgURL = coursedata.data.display_url;
           const { name, price, availableSeat, description } = data;
@@ -66,7 +68,7 @@ const onSubmit = data => {
           //     alert('edit successfully')
           //     console.log(result);
           //   });
-          axios.put(`http://localhost:5000/courses/${coursedata.id}`,courseItem)
+          axios.put(`http://localhost:5000/courses/${id.id}`,courseItem)
           .then(res=> {
             alert('edit sucessfull')
             console.log(res.data)

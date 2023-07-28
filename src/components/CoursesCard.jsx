@@ -8,7 +8,7 @@ const CoursesCard = ({ course }) => {
     const {user}=useContext(AuthContext)
     const navigate = useNavigate()
     const location= useLocation()
-    const { _id, name, image, price, availableSeat } = course || {}
+    const { _id, name, image, price, availableSeat ,Name} = course || {}
 
 
     const handleSelect =(course) =>{
@@ -61,10 +61,11 @@ const CoursesCard = ({ course }) => {
         <div className='mt-32'>
            
             <Link style={{textDecoration:'none'}} to={`/course/${_id}`}>
-                <img src={image} className='img-fluid' />
+                <img src={image} style={{width:'200px', height:'200px'}} />
                 
                     <h2 className="card-title">Course Name: {name}</h2>
-                    <p>Price: {price}</p>
+                    <h2 className="card-title">Instractor: {Name}</h2>
+                    <p>Price: ${price}</p>
                     <p>Available Seat: {availableSeat}</p>
                     </Link>
                     

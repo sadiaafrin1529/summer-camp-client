@@ -17,6 +17,8 @@ import MyClasses from "../pages/MyClasses";
 import EditCourse from "../pages/EditCourse";
 import PrivateRouter from "./PrivateRouter";
 import SelectedCourse from "../pages/SelectedCourse";
+import Payment from "../pages/Payment";
+import OrderSuccess from "../pages/OrderSuccess";
 
 
 export const router = createBrowserRouter([
@@ -88,6 +90,16 @@ export const router = createBrowserRouter([
             {
               path:'selectcourse',
               element:<SelectedCourse></SelectedCourse>
+            },
+            {
+              path:'payment/:id',
+              element:<Payment></Payment>,
+              loader:({params})=> fetch(`http://localhost:5000/addcart/payment/${params.id}`)
+              
+            },
+            {
+              path:'orderdone',
+              element:<OrderSuccess></OrderSuccess>
             }
     ]
   }

@@ -10,7 +10,10 @@ import Swal from 'sweetalert2';
 const MyClasses = () => {
   // const [myClass, setMyClass] = useState([]);
   const { user } = useContext(AuthContext);
-
+  const [info,setInfo]= useState({})
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
   // useEffect(() => {
   //   fetch(`http://localhost:5000/courses/myclass/${user?.email}`)
   //     .then((res) => res.json())
@@ -25,19 +28,25 @@ const MyClasses = () => {
       const res = await axios.get(
         `http://localhost:5000/courses/myclass/${user?.email}`
       );
+      console.log(res.data)
       return res.data;
     }
   );
-console.log(user?.email)
-//   const { data, refetch } = useQuery(['myClass',user?.email], async () => {
-//     const res = await fetch(`http://localhost:5000/courses/myclass/${user?.email}`)
-//     return res.json();
-
-// })
-
-console.log(myClass)
 
 
+const nodatafound =  <div style={{width:"100%",height:"10vh",display:"flex",justifyContent:"center",alignItems:"center"}}><b>No Data Found</b></div>
+
+
+const myModal = <>
+<dialog id="my_modal_3" className="modal">
+  <form method="dialog" className="modal-box">
+    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    <h3 className="font-bold text-lg">Feedback!</h3>
+    <p className="py-4"><b className='text-warning'><i>{info?.feedback?.feedback || nodatafound}</i></b></p>
+  </form>
+</dialog>
+
+</>
 
 const deleteCourse=(id)=>{
  
@@ -81,9 +90,15 @@ const deleteCourse=(id)=>{
                 <td className='border border-1 text-center'>{index + 1}</td>
                 <td className='border border-1 text-center'>{courseData.name}</td>
                 <td className='border border-1 text-center'>{courseData.availableSeat}</td>
-                <td className='border border-1 text-center'>
-             
-                </td>
+                
+                <div  onClick={handleShow} style={{width:'25px'}}>
+                
+                 <td >
+                  <div onClick={()=>setInfo(courseData)}>
+                <button> <FaClipboardCheck className='ml-12'  onClick={()=>window.my_modal_3.showModal()}   /></button>
+                  </div>
+                  </td>                     
+                </div>
                 <td className='border border-1 text-center'>{courseData.status}</td>
                 <td className='border border-1 text-center'>
                   <Link to={`/dashboard/edit/${courseData._id}`}>
@@ -95,6 +110,7 @@ const deleteCourse=(id)=>{
                 </td>
               </tr>
             ))}
+            {myModal}
           </tbody> 
           
         </table>
