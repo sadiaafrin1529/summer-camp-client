@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CommonTitle from '../components/CommonTitle';
-import CoursesCard from '../components/CoursesCard';
 
 const PopularClass = () => {
     const [popularr, setPopular] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/courses')
+        fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/courses')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import CoursesCard from './CoursesCard';
 import CommonTitle from './CommonTitle';
+import CoursesCard from './CoursesCard';
 
 
 const Courses = () => {
     
 const [courses,setCourse] = useState([]);
 useEffect(()=>{
-    fetch('http://localhost:5000/courses')
+    fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/courses')
     .then(res=>res.json())
     .then(data => setCourse(data))
 },[])

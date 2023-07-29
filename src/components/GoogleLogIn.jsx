@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
-import { AuthContext } from '../Provider/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const GoogleLogIn = () => {
     const { googleSignIn } = useContext(AuthContext)
@@ -16,7 +16,7 @@ const GoogleLogIn = () => {
             console.log(loggedInUSer)
             const saveUser = {name: loggedInUSer.displayName , email: loggedInUSer.email , photo: loggedInUSer.photoURL
             }
-            fetch('http://localhost:5000/users',{
+            fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/users',{
                 method:'POST',
                 headers:{
                   'content-type': 'application/json'

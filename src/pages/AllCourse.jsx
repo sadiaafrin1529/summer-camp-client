@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
-import CommonTitle from '../components/CommonTitle';
 import { AuthContext } from '../Provider/AuthProvider';
+import CommonTitle from '../components/CommonTitle';
 
 const AllCourse = () => {
     const {user} = useContext(AuthContext)
@@ -10,7 +10,7 @@ const AllCourse = () => {
     const [myId,setMyId] = useState('')
 
     const { data: courses = [], refetch } = useQuery(['courses',user?.email], async () => {
-        const res = await fetch('http://localhost:5000/courses')
+        const res = await fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/courses')
         return res.json();
 
     })
@@ -18,7 +18,7 @@ console.log(courses)
 
 
     const handleApprove = (id) => {
-        fetch(`http://localhost:5000/courses/approved/${id}`, {
+        fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/approved/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -40,7 +40,7 @@ console.log(courses)
         const info = {
             feedback : deniedShow,
         }
-        fetch(`http://localhost:5000/courses/feedback/${myId}`,{
+        fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/feedback/${myId}`,{
             method: 'PATCH',
             headers:{
                 'content-type' : 'application/json'
@@ -63,7 +63,7 @@ console.log(courses)
     }
 
     const handleDenied =() =>{
-        fetch(`http://localhost:5000/courses/denied/${myId}`, {
+        fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/denied/${myId}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

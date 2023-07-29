@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthProvider';
 import CommonTitle from '../components/CommonTitle';
-import Swal from 'sweetalert2';
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 const AddCourse = () => {
@@ -34,7 +34,7 @@ const AddCourse = () => {
                          Email:user?.email, availableSeat:availableSeat }
                     console.log(courseItem)
                     console.log(imgURL)
-                    fetch('http://localhost:5000/courses', {
+                    fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/courses', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

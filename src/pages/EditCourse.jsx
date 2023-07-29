@@ -1,11 +1,10 @@
 
-import React, { useContext, useEffect, useState } from 'react';
-import CommonTitle from '../components/CommonTitle';
-import { useForm } from 'react-hook-form';
-import { AuthContext } from '../Provider/AuthProvider';
-import { useLoaderData, useParams} from 'react-router-dom';
-import Swal from 'sweetalert2';
 import axios from 'axios';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLoaderData, useParams } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import CommonTitle from '../components/CommonTitle';
 
 
 const EditCourse = () => {
@@ -21,7 +20,7 @@ const EditCourse = () => {
     
 
 // useEffect(()=>{
-//     fetch(`http://localhost:5000/dashboard/edit/${coursedata.id}`)
+//     fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/dashboard/edit/${coursedata.id}`)
 //     .then(res=>res.json())
 //     .then(data=>setPreviousData(data))
 // },[coursedata.id])
@@ -56,7 +55,7 @@ const onSubmit = data => {
           console.log(courseItem);
           console.log(imgURL);
   
-          // fetch(`http://localhost:5000/courses/${coursedata.id}`, {
+          // fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/${coursedata.id}`, {
           //   method: 'PUT',
           //   headers: {
           //     "content-type": "application/json"
@@ -68,7 +67,7 @@ const onSubmit = data => {
           //     alert('edit successfully')
           //     console.log(result);
           //   });
-          axios.put(`http://localhost:5000/courses/${id.id}`,courseItem)
+          axios.put(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/${id.id}`,courseItem)
           .then(res=> {
             alert('edit sucessfull')
             console.log(res.data)

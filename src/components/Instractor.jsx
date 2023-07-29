@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import CommonTitle from './CommonTitle';
 import { FaUserTie } from 'react-icons/fa';
+import CommonTitle from './CommonTitle';
 
 const Instractor = () => {
     const [instractor, setInstractor] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/users')
+        fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/users')
         .then(res=>res.json())
         .then(data=>{
             setInstractor(data.filter((courseinstractor) => courseinstractor.role === 'instructor'))

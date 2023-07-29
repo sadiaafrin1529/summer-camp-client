@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../Provider/AuthProvider';
-import CommonTitle from '../components/CommonTitle';
-import { FaAtlas, FaClipboardCheck, FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import { FaClipboardCheck, FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Provider/AuthProvider';
+import CommonTitle from '../components/CommonTitle';
 
 const MyClasses = () => {
   // const [myClass, setMyClass] = useState([]);
@@ -15,7 +15,7 @@ const MyClasses = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/courses/myclass/${user?.email}`)
+  //   fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/myclass/${user?.email}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setMyClass(data);
@@ -26,7 +26,7 @@ const MyClasses = () => {
     ["myClass", user?.email],
     async () => {
       const res = await axios.get(
-        `http://localhost:5000/courses/myclass/${user?.email}`
+        `https://arts-craft-server-sadiaafrin1529.vercel.app/courses/myclass/${user?.email}`
       );
       console.log(res.data)
       return res.data;
@@ -51,7 +51,7 @@ const myModal = <>
 const deleteCourse=(id)=>{
  
   if(confirm){
-    fetch(`http://localhost:5000/courses/deletecourse/${id}`,{
+    fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/deletecourse/${id}`,{
       method: 'DELETE',
     })
     .then(res =>res.json())

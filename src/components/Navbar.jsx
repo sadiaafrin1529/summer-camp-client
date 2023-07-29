@@ -1,15 +1,14 @@
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/image/logo.png'
 import { AuthContext } from '../Provider/AuthProvider';
-import axios from 'axios';
 const Navbar = () => {
   const{user,logout}=useContext(AuthContext)
   console.log(user)
 
   const [photo,setPhoto] = useState()
 
-  axios.get(`http://localhost:5000/users/personalData?email=xyz@gmail.com`)
+  axios.get(`https://arts-craft-server-sadiaafrin1529.vercel.app/users/personalData?email=xyz@gmail.com`)
   .then(res=>{
     console.log(res.data)
   })

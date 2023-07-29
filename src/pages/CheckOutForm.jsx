@@ -1,8 +1,8 @@
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 
 const CheckoutForm = ({ price, data }) => {
   const { user } = useContext(AuthContext);
@@ -13,7 +13,7 @@ const CheckoutForm = ({ price, data }) => {
   const [transactionId, setTransactionId] = useState("");
 
   const { data: paymentData = [], refetch } = useQuery(["users"], async () => {
-    const res = await axios.post("http://localhost:5000/create-payment-intent", { price });
+    const res = await axios.post("https://arts-craft-server-sadiaafrin1529.vercel.app/create-payment-intent", { price });
     return res.data.clientSecret;
   });
   console.log(paymentData);
@@ -71,7 +71,7 @@ const CheckoutForm = ({ price, data }) => {
         instructorName: data.instructorName,
         instructorEmail: data.instructorEmail,
       };
-      axios.post("http://localhost:5000/payments", payment).then((res) => {
+      axios.post("https://arts-craft-server-sadiaafrin1529.vercel.app/payments", payment).then((res) => {
         if (res.data) {
           alert("Payment Success");
         }

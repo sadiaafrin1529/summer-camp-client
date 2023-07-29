@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../Provider/AuthProvider';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const CoursesCard = ({ course }) => {
     const {user}=useContext(AuthContext)
@@ -24,7 +24,7 @@ const CoursesCard = ({ course }) => {
         price: course.price,
         userEmail
     }
-    fetch(`http://localhost:5000/addcart`,{
+    fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/addcart`,{
         method: 'POST',
         headers:{
             'content-type': 'application/json'

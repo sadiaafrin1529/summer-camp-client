@@ -1,24 +1,22 @@
 import {
-  createBrowserRouter,
-
+    createBrowserRouter,
 } from "react-router-dom";
-import Main from "../components/LayOut/Main";
+import Courses from "../components/Courses";
 import Home from "../components/Home";
+import Instractor from "../components/Instractor";
+import Dashboard from "../components/LayOut/Dashboard";
+import Main from "../components/LayOut/Main";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import Dashboard from "../components/LayOut/Dashboard";
 import AddCourse from "../pages/AddCourse";
-import AllUsers from "../pages/AllUsers";
-import CoursesCard from "../components/CoursesCard";
-import Courses from "../components/Courses";
 import AllCourse from "../pages/AllCourse";
-import Instractor from "../components/Instractor";
-import MyClasses from "../pages/MyClasses";
+import AllUsers from "../pages/AllUsers";
 import EditCourse from "../pages/EditCourse";
-import PrivateRouter from "./PrivateRouter";
-import SelectedCourse from "../pages/SelectedCourse";
-import Payment from "../pages/Payment";
+import MyClasses from "../pages/MyClasses";
 import OrderSuccess from "../pages/OrderSuccess";
+import Payment from "../pages/Payment";
+import SelectedCourse from "../pages/SelectedCourse";
+import PrivateRouter from "./PrivateRouter";
 
 
 export const router = createBrowserRouter([
@@ -33,7 +31,7 @@ export const router = createBrowserRouter([
       {
         path:'/classes',
         element:<Courses></Courses>,
-        // loader:({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
+        // loader:({params})=> fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/courses/${params.id}`)
       },
       {
         path:'/instractor',
@@ -75,7 +73,7 @@ export const router = createBrowserRouter([
               element: <EditCourse></EditCourse>,
               loader: async ({ params }) => {
                 try {
-                  const response = await fetch(`http://localhost:5000/dashboard/edit/${params.id}`);
+                  const response = await fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/dashboard/edit/${params.id}`);
                   if (!response.ok) {
                     throw new Error('Failed to fetch data');
                   }
@@ -94,7 +92,7 @@ export const router = createBrowserRouter([
             {
               path:'payment/:id',
               element:<Payment></Payment>,
-              loader:({params})=> fetch(`http://localhost:5000/addcart/payment/${params.id}`)
+              loader:({params})=> fetch(`https://arts-craft-server-sadiaafrin1529.vercel.app/addcart/payment/${params.id}`)
               
             },
             {

@@ -1,14 +1,14 @@
 
-import logout2 from '../assets/image/register.jpg'
+import { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../Provider/AuthProvider';
-import { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Provider/AuthProvider';
+import logout2 from '../assets/image/register.jpg';
 import GoogleLogIn from './GoogleLogIn';
 
 const Register = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset,formState: { errors } } = useForm();
   const { creatUser, updateUserProfile } = useContext(AuthContext)
 
 
@@ -22,7 +22,7 @@ const Register = () => {
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
             const saveUser={name:data.name , email: data.email, photo:data.photo , role:'student'}
-            fetch('http://localhost:5000/users',{
+            fetch('https://arts-craft-server-sadiaafrin1529.vercel.app/users',{
               method: 'POST',
               headers:{
                 'content-type':'application/json'
@@ -32,7 +32,7 @@ const Register = () => {
               .then(res => res.json())
               .then(data => {
                 if (data.insertedId) {
-                  // reset()
+                  reset()
                   Swal.fire({
 
                     text: 'User Added',
@@ -80,9 +80,31 @@ const Register = () => {
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input {...register("password")} type="password" placeholder="password" className="input input-bordered" />
+              <input {...register("password",{
+                  required: true,
+                  pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&? "])(?=.*[a-z])/,
+                   maxLength: 20
+                })} type="password" placeholder="password" className="input input-bordered" />
+                {errors.password?.type === 'minLength' && <p className='text-red-600'>password must be 6 characters</p>}
+                {errors.password?.type === 'maxLength' && <p className='text-red-600'>password less then 20</p>}
+                {errors.password?.type === 'pattern' && <p className='text-red-600'>password must have one uppercase and one lower case and one special character</p>}
 
             </div>
+            {/* <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input type="password" {...register("password", {
+                  required: true,
+                  pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*[!#$%&? "])(?=.*[0-9](?=.*[a-z]))/,
+                  minLength: 6
+                  , maxLength: 20
+                })} name='password' placeholder="password" className="input input-bordered" />
+                {errors.password?.type === 'minLength' && <p className='text-red-600'>password must be 6 characters</p>}
+                {errors.password?.type === 'maxLength' && <p className='text-red-600'>password less then 20</p>}
+                {errors.password?.type === 'pattern' && <p className='text-red-600'>password must have one uppercase and one lower case,one number and one special character</p>}
+
+              </div> */}
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>

@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import CommonTitle from '../components/CommonTitle';
+import React, { useContext } from 'react';
 import { FaDollarSign, FaStripe } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import CommonTitle from '../components/CommonTitle';
 
 const SelectedCourse = () => {
   const { user } = useContext(AuthContext);
@@ -12,7 +12,7 @@ const SelectedCourse = () => {
   const { data = [], refetch, isLoading } = useQuery(
     ['selectcourse'],
     async () => {
-      const res = await axios.get(`http://localhost:5000/addcart/${user?.email}`);
+      const res = await axios.get(`https://arts-craft-server-sadiaafrin1529.vercel.app/addcart/${user?.email}`);
       return res.data;
     }
   );
