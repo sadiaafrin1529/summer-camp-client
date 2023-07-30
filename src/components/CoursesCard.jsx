@@ -3,13 +3,14 @@ import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthProvider';
+import Login from './Login';
 
 const CoursesCard = ({ course }) => {
     const {user}=useContext(AuthContext)
     const navigate = useNavigate()
     const location= useLocation()
     const { _id, name, image, price, availableSeat ,Name} = course || {}
-
+    const from = location.state?.from?.pathname || "/login";
 
     const handleSelect =(course) =>{
    const userEmail= user?.email;
@@ -46,11 +47,9 @@ const CoursesCard = ({ course }) => {
    }
     }
     const handleLogin = () =>{
-        toast.error((t) => (
-            <span>
-                Please  {navigate("/login", { state:{ from: location.state?.from?.pathname ||'/classes'}} ) }
-            </span>
-          ));
+        
+            navigate(from, { replace: true })
+         
        
             
                 //    const from = location.state?.from?.pathname || "/";
@@ -69,13 +68,13 @@ const CoursesCard = ({ course }) => {
                     <p>Available Seat: {availableSeat}</p>
                     </Link>
                     
-                       <Link>
+                       
                         {
                             user?.email ? <button onClick={()=>handleSelect(course)} className="btn btn-primary">Select Class</button>
                             :
                             <button onClick={()=>handleLogin()} className="btn btn-primary">Select Class</button>
                         }
-                       </Link>
+                       
                    
                 
            
