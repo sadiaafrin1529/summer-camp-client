@@ -16,7 +16,7 @@ const PopularClass = () => {
         <div>
             <CommonTitle title={'POPULAR COURSES'}></CommonTitle>
             <div className='grid md:grid-cols-3 cols gap-5 m-20'>
-                {
+            {
                     popularr.map(popular =>
                         <div className='border-2 mx-8 w-64 '>
                             <div className='flex'>

@@ -3,7 +3,7 @@ import middlebanner from '../assets/image/middlebanner.jpg'
 import '../components/Banner2.css'
 const Banner2 = () => {
     return (
-       <div className='middleBanner mb-20'>
+       <div className='middleBanner mb-20 mt-20'>
          <div className='justify-center items-center py-8 px-16'>
            {/* <div>
             <img style={{width:'400px',height:'200px'}} src={middlebanner} alt="" />

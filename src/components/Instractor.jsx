@@ -16,14 +16,14 @@ const Instractor = () => {
         
         <>
     
-      <div className='mt-40'>
+      <div className='mt-15'>
       <CommonTitle title='OUR INSTRACTOR'></CommonTitle>
       </div>
-        <div className='grid md:grid-cols-3 gap-5'>
+        <div className='grid md:grid-cols-3 gap-2'>
             
            {
             instractor.map((teacher,index)=> 
-            <div className='mt-40 mb-40 m-20'
+            <div className='mt-20 mb-20 m-10'
             >
                 <div>
                     <img className='w-24 rounded-full' src={teacher.photo} />

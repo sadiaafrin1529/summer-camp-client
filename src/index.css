@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.banner{
+    background:url(../src/assets/image/office.jpg),linear-gradient(rgba(0, 0, 0, 0.601),rgba(0, 0, 0, 0.601));
+    background-position: center;
+    background-size: cover;
+background-repeat: no-repeat;
+}
+/* url(../src/assets/image/office.jpg) */
